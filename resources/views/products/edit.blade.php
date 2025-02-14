@@ -7,7 +7,8 @@
     <hr />
     <form action="{{ route('products.update', $product->id) }}" method="POST">
         @csrf
-        @method('PUT')
+        @method('PUT').
+        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <div class="row">
             <div class="col mb-3">
                 <label class="form-label">Name</label>
@@ -35,10 +36,12 @@
                 <input type="number" name="unit" class="form-control" placeholder="unit" value="{{ $product->unit }}">
             </div>
             <div class="col">
-                <select name="id_categorie" id="id_categorie" class="form-select">
+                <label class="form-label">category</label>
+                <select name="categorie_id" id="categorie_id" class="custom-select">
                     <option selected>select category</option>
                     @foreach ($datacategorie as $data)
-                        <option value="{{ $data->id }}" {{ ($product->id_categorie == $data->id ? 'selected' : 'null')}}>{{ $data->name }}</option>
+                        <option value="{{ $data->id }}" {{ $product->categorie_id == $data->id ? 'selected' : 'null' }}>
+                            {{ $data->name }}</option>
                     @endforeach
                 </select>
             </div>

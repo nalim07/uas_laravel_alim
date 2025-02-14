@@ -5,6 +5,7 @@
 @section('contents')
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <div class="row">
             <div class="col-12">
                 <div class="card shadow mb-4">
@@ -38,7 +39,7 @@
                                     <input type="number" name="unit" class="form-control" placeholder="Unit">
                                 </div>
                                 <div class="col">
-                                    <select name="id_categorie" id="id_categorie" class="custom-select">
+                                    <select name="categorie_id" id="categorie_id" class="custom-select">
                                         <option selected>Select Category</option>
                                         @foreach ($datacategorie as $data)
                                             <option value="{{ $data->id }}">{{ $data->name }}</option>
